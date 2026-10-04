@@ -1,0 +1,830 @@
+{
+  "version": 1,
+  "notes": "Pipeline-resolution MP4s (e.g. 720×1280 Shorts). Each clip points at movie-images/<date_id>/<NN>.mp4 via source; copy or symlink into clips/ if you want a stable library filename. Thumbnails use source paths when clips/ is empty.",
+  "clips": [
+    {
+      "id": "18040507_01_riverbank_group",
+      "file": "clips/18040507_01.mp4",
+      "tags": [
+        "river",
+        "riverbank",
+        "group",
+        "morning",
+        "sky"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040507",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Copy from movie-images/18040507/01.mp4 when using clips/ path."
+      }
+    },
+    {
+      "id": "18040507_07_sunset_river_wide",
+      "file": "clips/18040507_07.mp4",
+      "tags": [
+        "sunset",
+        "river",
+        "silhouette",
+        "wide",
+        "evening"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040507",
+        "segment_index": 7,
+        "vendor": "fal",
+        "notes": "Copy from movie-images/18040507/07.mp4 when using clips/ path."
+      }
+    },
+    {
+      "id": "18040510_01_rain_tent",
+      "file": "clips/18040510_01.mp4",
+      "tags": [
+        "camp",
+        "tent",
+        "rain",
+        "mud",
+        "morning",
+        "clouds"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040510",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Into Uncharted Lands — rain on canvas, puddle, cloudy sky."
+      }
+    },
+    {
+      "id": "18040510_08_campfire_dusk",
+      "file": "clips/18040510_08.mp4",
+      "tags": [
+        "camp",
+        "fire",
+        "night",
+        "evening",
+        "men",
+        "tents"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040510",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Campfire circle, long shadows, contemplative."
+      }
+    },
+    {
+      "id": "18040504_01_rain_canvas_river",
+      "file": "clips/18040504_01.mp4",
+      "tags": [
+        "rain",
+        "tent",
+        "canvas",
+        "river",
+        "missouri",
+        "mist"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040504",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Edge of Departure — rain on tent, swollen river."
+      }
+    },
+    {
+      "id": "18040504_02_river_boats",
+      "file": "clips/18040504_02.mp4",
+      "tags": [
+        "river",
+        "boats",
+        "paddling",
+        "current",
+        "bank"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040504",
+        "segment_index": 2,
+        "vendor": "fal",
+        "notes": "Boats downstream, distant settlement."
+      }
+    },
+    {
+      "id": "18040504_05_river_rising_wide",
+      "file": "clips/18040504_05.mp4",
+      "tags": [
+        "river",
+        "wide",
+        "flood",
+        "trees",
+        "bank",
+        "water"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040504",
+        "segment_index": 5,
+        "vendor": "fal",
+        "notes": "Wide Missouri, rising water, submerged vegetation."
+      }
+    },
+    {
+      "id": "18040504_07_camp_rain_horizon",
+      "file": "clips/18040504_07.mp4",
+      "tags": [
+        "camp",
+        "rain",
+        "river",
+        "wide",
+        "silhouette",
+        "gray"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040504",
+        "segment_index": 7,
+        "vendor": "fal",
+        "notes": "Camp silhouettes, rain, river and blurred horizon."
+      }
+    },
+    {
+      "id": "18040104_01_frozen_river",
+      "file": "clips/18040104_01.mp4",
+      "tags": [
+        "ice",
+        "frozen",
+        "river",
+        "winter",
+        "reeds",
+        "cold"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040104",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Frozen Waters — ice sheet, pale sky, frost reeds."
+      }
+    },
+    {
+      "id": "18040104_04_thermometer_interior",
+      "file": "clips/18040104_04.mp4",
+      "tags": [
+        "interior",
+        "cabin",
+        "firelight",
+        "winter",
+        "detail"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040104",
+        "segment_index": 4,
+        "vendor": "fal",
+        "notes": "Mercury thermometer, log wall, warm firelight."
+      }
+    },
+    {
+      "id": "18040104_06_settlement_winter",
+      "file": "clips/18040104_06.mp4",
+      "tags": [
+        "winter",
+        "settlement",
+        "cabins",
+        "snow",
+        "sled",
+        "horse"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040104",
+        "segment_index": 6,
+        "vendor": "fal",
+        "notes": "Wide frontier settlement, sled, heavy coats."
+      }
+    },
+    {
+      "id": "18040104_08_frozen_river_moonlit",
+      "file": "clips/18040104_08.mp4",
+      "tags": [
+        "ice",
+        "night",
+        "moon",
+        "river",
+        "wide",
+        "smoke",
+        "camp"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040104",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Moonlit frozen river, distant camp smoke."
+      }
+    },
+    {
+      "id": "18040510_04_preview",
+      "file": "clips/18040510_04.mp4",
+      "tags": [
+        "seaman",
+        "newfoundland",
+        "shakes",
+        "rainwater",
+        "energetically",
+        "droplets",
+        "flying",
+        "thick",
+        "black",
+        "coat"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040510",
+        "segment_index": 4,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040510_07_preview",
+      "file": "clips/18040510_07.mp4",
+      "tags": [
+        "corps",
+        "work",
+        "unison",
+        "adjusting",
+        "loads",
+        "securing",
+        "gear",
+        "movements",
+        "synchronized",
+        "task"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040510",
+        "segment_index": 7,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040409_08_preview",
+      "file": "clips/18040409_08.mp4",
+      "tags": [
+        "sets",
+        "patrick",
+        "gass",
+        "stands",
+        "edge",
+        "gazing",
+        "hands",
+        "rest",
+        "stack",
+        "supplies"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040409",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040409_02_preview",
+      "file": "clips/18040409_02.mp4",
+      "tags": [
+        "captures",
+        "sprawling",
+        "camp",
+        "along",
+        "riverbank",
+        "tents",
+        "shelters",
+        "scattered",
+        "across",
+        "greenery"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040409",
+        "segment_index": 2,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040409_05_preview",
+      "file": "clips/18040409_05.mp4",
+      "tags": [
+        "seaman",
+        "newfoundland",
+        "trots",
+        "camp",
+        "weaving",
+        "between",
+        "busy",
+        "equipment",
+        "presence",
+        "steady"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040409",
+        "segment_index": 5,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040513_02_preview",
+      "file": "clips/18040513_02.mp4",
+      "tags": [
+        "drifts",
+        "slowly",
+        "flowing",
+        "capturing",
+        "surface",
+        "rippling",
+        "steady",
+        "rain",
+        "moves",
+        "deliberate"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040513",
+        "segment_index": 2,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040513_03_preview",
+      "file": "clips/18040513_03.mp4",
+      "tags": [
+        "william",
+        "clark",
+        "steps",
+        "canvas",
+        "awning",
+        "french",
+        "courier",
+        "approaches",
+        "extending",
+        "oilskin"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040513",
+        "segment_index": 3,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040513_08_preview",
+      "file": "clips/18040513_08.mp4",
+      "tags": [
+        "william",
+        "clark",
+        "stands",
+        "edge",
+        "gazing",
+        "northward",
+        "pulls",
+        "slowly",
+        "reveal",
+        "camp"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040513",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040515_01_preview",
+      "file": "clips/18040515_01.mp4",
+      "tags": [
+        "corps",
+        "boatman",
+        "stands",
+        "riverbank",
+        "adjusting",
+        "tension",
+        "soaked",
+        "rope",
+        "tied",
+        "canoe"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040515",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040515_04_preview",
+      "file": "clips/18040515_04.mp4",
+      "tags": [
+        "sets",
+        "fifer",
+        "landing",
+        "casting",
+        "long",
+        "shadows",
+        "across",
+        "camp",
+        "tents",
+        "pitched"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040515",
+        "segment_index": 4,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040515_08_preview",
+      "file": "clips/18040515_08.mp4",
+      "tags": [
+        "expedition",
+        "camp",
+        "quiet",
+        "star",
+        "filled",
+        "campfire",
+        "burns",
+        "flickering",
+        "faces",
+        "reflect"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040515",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040516_07_preview",
+      "file": "clips/18040516_07.mp4",
+      "tags": [
+        "panoramic",
+        "view",
+        "countryside",
+        "surrounding",
+        "charles",
+        "showing",
+        "prairies",
+        "dense",
+        "forest",
+        "stretching"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040516",
+        "segment_index": 7,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040516_10_preview",
+      "file": "clips/18040516_10.mp4",
+      "tags": [
+        "setting",
+        "casts",
+        "long",
+        "shadows",
+        "village",
+        "members",
+        "expedition",
+        "gather",
+        "near",
+        "riverbank"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040516",
+        "segment_index": 10,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040518_01_preview",
+      "file": "clips/18040518_01.mp4",
+      "tags": [
+        "william",
+        "clark",
+        "standing",
+        "riverbank",
+        "directs",
+        "loading",
+        "supplies",
+        "pirogue",
+        "hand",
+        "rests"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040518",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040520_02_preview",
+      "file": "clips/18040520_02.mp4",
+      "tags": [
+        "pans",
+        "lush",
+        "prairie",
+        "transitioning",
+        "dense",
+        "woodlands",
+        "clouds",
+        "gather",
+        "overhead",
+        "casting"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040520",
+        "segment_index": 2,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040520_04_preview",
+      "file": "clips/18040520_04.mp4",
+      "tags": [
+        "missouri",
+        "charles",
+        "bank",
+        "village",
+        "layout",
+        "visible",
+        "streets",
+        "running",
+        "parallel",
+        "hills"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040520",
+        "segment_index": 4,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040531_01_preview",
+      "file": "clips/18040531_01.mp4",
+      "tags": [
+        "corps",
+        "boatman",
+        "braces",
+        "against",
+        "wind",
+        "tightening",
+        "rope",
+        "securing",
+        "keelboat",
+        "tree"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040531",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040531_02_preview",
+      "file": "clips/18040531_02.mp4",
+      "tags": [
+        "wind",
+        "gusts",
+        "send",
+        "leaves",
+        "debris",
+        "skittering",
+        "across",
+        "past",
+        "tents",
+        "where"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040531",
+        "segment_index": 2,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040601_01_preview",
+      "file": "clips/18040601_01.mp4",
+      "tags": [
+        "keelboat",
+        "leads",
+        "cutting",
+        "swift",
+        "missouri",
+        "current",
+        "visible",
+        "effort",
+        "crew",
+        "members"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040601",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040601_07_preview",
+      "file": "clips/18040601_07.mp4",
+      "tags": [
+        "gass",
+        "sits",
+        "campfire",
+        "silhouette",
+        "framed",
+        "warm",
+        "glow",
+        "looks",
+        "thoughtfully",
+        "flames"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040601",
+        "segment_index": 7,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040606_08_preview",
+      "file": "clips/18040606_08.mp4",
+      "tags": [
+        "camp",
+        "setup",
+        "tents",
+        "fire",
+        "evening",
+        "approaches",
+        "corps",
+        "sets",
+        "north",
+        "side"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040606",
+        "segment_index": 8,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040606_01_preview",
+      "file": "clips/18040606_01.mp4",
+      "tags": [
+        "crew",
+        "preparing",
+        "boat",
+        "members",
+        "keelboat",
+        "deck",
+        "work",
+        "mending",
+        "mast",
+        "early"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040606",
+        "segment_index": 1,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    },
+    {
+      "id": "18040606_09_preview",
+      "file": "clips/18040606_09.mp4",
+      "tags": [
+        "long",
+        "fading",
+        "flows",
+        "steadily",
+        "expedition",
+        "presses",
+        "driven",
+        "promise",
+        "discovery",
+        "creates"
+      ],
+      "aspect_ratio": "9:16",
+      "duration_seconds": null,
+      "source": {
+        "kind": "pipeline_generation",
+        "date_id": "18040606",
+        "segment_index": 9,
+        "vendor": "fal",
+        "notes": "Added from pipeline UI (latest video preview while paused)."
+      }
+    }
+  ]
+}

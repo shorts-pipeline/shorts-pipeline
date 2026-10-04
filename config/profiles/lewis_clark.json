@@ -1,0 +1,34 @@
+{
+  "id": "lewis_clark",
+  "label": "Lewis & Clark expedition journals",
+  "prompt_pack": "lewis_clark",
+  "output_prefix": "lewis_clark",
+  "source": {
+    "type": "tei_journal",
+    "xml_dir": "journal-entries"
+  },
+  "phase1_user_prompt": {
+    "use_tension_arcs": true,
+    "use_expedition_user_notes": true,
+    "use_journal_author_line": true,
+    "use_macro_event_editorial": true,
+    "focus_topic_compares_1803": true,
+    "user_opening_template": "Generate the narration JSON for journal date_id {date_id}.",
+    "source_body_heading": "JOURNAL ENTRY:",
+    "tei_notes_heading": "TEI EDITORIAL NOTES (footnotes linked from this entry; use for historical color, third-person):"
+  },
+  "phase2": {
+    "focus_expedition_era": true,
+    "historical_only_visuals": true,
+    "seasonal_ambient_from_date_id": true
+  },
+  "features": {
+    "use_theme_engine": true,
+    "use_character_hints": true
+  },
+  "long_document": {
+    "parent_document_id": null,
+    "chunk_index": null,
+    "chunk_note": "Reserved for future multi-chunk episodes; single-artifact runs ignore this."
+  }
+}

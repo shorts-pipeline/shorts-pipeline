@@ -1,0 +1,33 @@
+{
+  "id": "generic_plain",
+  "label": "Plain-text source (generic documentary)",
+  "prompt_pack": "generic_documentary",
+  "output_prefix": "episode",
+  "source": {
+    "type": "plain_file"
+  },
+  "phase1_user_prompt": {
+    "use_tension_arcs": false,
+    "use_expedition_user_notes": false,
+    "use_journal_author_line": false,
+    "use_macro_event_editorial": false,
+    "focus_topic_compares_1803": false,
+    "user_opening_template": "Generate the narration JSON for episode_id {date_id} based on the following source text.",
+    "source_body_heading": "SOURCE TEXT:",
+    "tei_notes_heading": "SUPPLEMENTAL NOTES (use only to clarify the source; third-person):"
+  },
+  "phase2": {
+    "focus_expedition_era": false,
+    "historical_only_visuals": false,
+    "seasonal_ambient_from_date_id": false
+  },
+  "features": {
+    "use_theme_engine": false,
+    "use_character_hints": false
+  },
+  "long_document": {
+    "parent_document_id": null,
+    "chunk_index": null,
+    "chunk_note": "Future: set parent_document_id and chunk_index when splitting long sources into multiple episode_ids."
+  }
+}

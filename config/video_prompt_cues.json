@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "enabled": true,
+  "cues": [
+    {
+      "id": "period_firewood",
+      "enabled": true,
+      "comment": "Campfires and wood fuel/chopping beats — avoid sawn or chainsaw-cut lumber in generative video.",
+      "scan_fields": ["narration", "video_prompt", "opening_frame"],
+      "trigger_pattern": "(?i)\\b(?:campfires?|fire\\s*ring|firelight|embers?|kindling|fuel\\s*wood|woodpile|cordwood|firewood|split(?:ting)?\\s+wood|chopp(?:ing|ed)\\s+wood|wood\\s+chopp|hew(?:ing|n)\\s+(?:timber|wood)|fell(?:ing)?\\s+timber|hatchet|hand\\s*axe)\\b",
+      "skip_if_pattern": "(?i)\\b(?:rough-hewn|rough\\s+hewn|hand-hewn|axe-cut|axe-felled|hatchet-cut|no\\s+sawn|unsawn|split\\s+stave|period\\s+timber|chainsaw|sawn\\s+lumber|milled\\s+(?:lumber|boards|timbers)|mill-planed|machine-smooth|machine-planed)\\b",
+      "append_fields": ["video_prompt", "opening_frame"],
+      "append": "Fuelwood and camp sticks show rough-hewn, axe-cut ends; no sawn lumber, milled boards, or machine-planed wood."
+    }
+  ]
+}

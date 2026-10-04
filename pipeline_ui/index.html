@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Lewis & Clark — run-daily</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1 id="title">Pipeline UI</h1>
+  <p class="desc" id="description">Loading options…</p>
+
+  <div class="app-tabs" role="tablist" aria-label="Top-level views">
+    <button type="button" class="app-tab active" role="tab" aria-selected="true" aria-controls="panel-pipeline" id="app-tab-pipeline" data-app-tab="pipeline">Pipeline</button>
+    <button type="button" class="app-tab" role="tab" aria-selected="false" aria-controls="panel-library" id="app-tab-library" data-app-tab="library">Library</button>
+  </div>
+
+  <div id="panel-pipeline" class="app-panel" role="region" aria-label="Pipeline">
+  <div class="panel" id="form-panel">
+    <div id="load-err" class="status err" style="display:none"></div>
+    <div class="workflow-tabs" role="tablist" aria-label="Pipeline workflow">
+      <button type="button" class="workflow-tab active" role="tab" aria-selected="true" id="tab-wf-journal" data-workflow="journal">Journal</button>
+      <button type="button" class="workflow-tab" role="tab" aria-selected="false" id="tab-wf-narration" data-workflow="narration">Produce</button>
+      <button type="button" class="workflow-tab" role="tab" aria-selected="false" id="tab-wf-video" data-workflow="video">Video</button>
+      <button type="button" class="workflow-tab" role="tab" aria-selected="false" id="tab-wf-full" data-workflow="full">Full run</button>
+    </div>
+    <p id="workflow-desc" class="desc" style="margin-top:0"></p>
+    <div class="field journal-picker-row" style="margin-top:0">
+      <label class="main" for="journalDatePicker">Journal date picker (1803–1806)</label>
+      <div class="journal-picker-controls">
+        <input type="date" id="journalDatePicker" name="journalDatePicker" min="1803-01-01" max="1806-12-31" />
+        <button type="button" id="btn-episode-state" class="secondary compact" title="View pipeline state for this journal date">Pipeline state</button>
+      </div>
+      <div class="help">Defaults to the latest narration or video date when known. Used as the run date for Journal, Produce, and Video workflows (Full run can also use the text field below).</div>
+      <p class="help journal-help-links">
+        <a id="journal-unl-link" class="journal-unl-link is-disabled" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true" data-ready="0">View this date on UNL Journals (lewisandclarkjournals.unl.edu)</a>
+        <button type="button" class="linklike" id="btn-open-journal-xml">Open diary XML</button>
+      </p>
+    </div>
+    <div id="wf-section-journal" class="wf-section wf-section--card panel">
+      <div id="episode-diversity-wrap" class="episode-diversity-panel">
+        <div class="meta">
+          Episode diversity — soft Phase 1 hints (<code>lewis_clark*</code> prompt packs only; see <code>prompt_packs/…/pack.json</code> → <code>episode_diversity</code>)
+        </div>
+        <div id="episode-diversity-status" class="help episode-diversity-status">Pick a journal date above.</div>
+        <div id="episode-diversity-recent-block" class="episode-diversity-block" style="display:none">
+          <div class="episode-diversity-subhead">Recent episodes on disk</div>
+          <ul id="episode-diversity-recent" class="episode-diversity-list"></ul>
+        </div>
+        <div id="episode-diversity-hints-block" class="episode-diversity-block" style="display:none">
+          <div class="episode-diversity-subhead">Diversity hints (soft)</div>
+          <ul id="episode-diversity-hints" class="episode-diversity-list episode-diversity-hints"></ul>
+        </div>
+        <div id="episode-diversity-llm-block" class="episode-diversity-block" style="display:none">
+          <div class="episode-diversity-subhead">LLM audit (cached)</div>
+          <div id="episode-diversity-llm-meta" class="help episode-diversity-llm-meta"></div>
+          <ul id="episode-diversity-llm-hints" class="episode-diversity-list episode-diversity-llm-hints"></ul>
+          <div id="episode-diversity-llm-refresh" class="help episode-diversity-llm-refresh"></div>
+        </div>
+      </div>
+      <div class="meta" style="margin-top:1rem">Phase 1 — first call (structure + <code>segments[]</code>; system + user)</div>
+      <pre id="phase1-prompt-pre" class="desc" style="color:var(--text)">Pick a journal date above to load the preview.</pre>
+      <div id="phase1-dialogue-prompt-wrap" style="display:none;margin-top:1rem">
+        <div class="meta">
+          Phase 1 — <strong>dialogue polish</strong> (<code>phase1-dialogue</code>, second model call: rewrite <code>dialogue[].text</code> only). Source for full user text:
+          <code id="phase1-dialogue-user-source" style="font-weight:normal"></code>
+        </div>
+        <pre id="phase1-dialogue-prompt-pre" class="desc" style="color:var(--text);max-height:18rem;margin-top:0.35rem"></pre>
+      </div>
+      <div class="field" style="margin:0.75rem 0 0">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalNoFocusTopic" /> No automatic focus topic</label>
+      </div>
+      <div class="field" style="margin:0.5rem 0 0">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalDialogueMode" /> Dialogue mode (character voices)</label>
+        <div class="help" style="margin-top:0.25rem">
+          Uses <code>lewis_clark_dialogue</code> for Phase 1 and passes <code>--dialogue</code> on Run (unless long-conversation below is on). Previews update when toggled. With dialogue on, the <strong>second</strong> block shows the
+          <code>phase1-dialogue</code> prompts (after narration exists, user text is built from <code>narrations/narration&lt;date&gt;_voice.json</code>).
+        </div>
+      </div>
+      <div class="field" style="margin:0.5rem 0 0">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalLongConversationMode" /> Long conversation episode</label>
+        <div class="help" style="margin-top:0.25rem">
+          Uses <code>lewis_clark_long_conversation</code> for Phase 1 (+ Phase 2); passes <code>--long-conversation</code> on Run (implies dialogue). Previews use this pack when checked.
+        </div>
+      </div>
+      <div class="field" style="margin:0.5rem 0 0">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalUseWeekArc" /> Use week arc (7 journal days)</label>
+        <div class="help" style="margin-top:0.25rem">
+          Load or create a 7-journal-day plan in <code>state/week_arcs/</code> (anchor in <code>config/week_arc.json</code>) and apply today&apos;s recommended mode unless dialogue options above override. Passes <code>--use-week-arc</code> on Run.
+        </div>
+      </div>
+      <div class="field" style="margin:0.5rem 0 0" id="journalRefreshWeekArcWrap">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalRefreshWeekArc" /> Refresh week arc plan</label>
+        <div class="help" style="margin-top:0.25rem">When week arc is on: regenerate the cached plan before this run (<code>--refresh-week-arc</code>).</div>
+      </div>
+      <div class="field" style="margin:0.5rem 0 0">
+        <label class="main" style="font-weight:normal"><input type="checkbox" id="journalRegenerateNarration" /> Regenerate narration</label>
+        <div class="help" style="margin-top:0.25rem">When checked, Run passes <code>--no-skip-existing</code> so two-phase narration runs even if <code>narrations/narration&lt;date&gt;.json</code> already exists (still narration-only: no TTS or video).</div>
+      </div>
+      <div class="field" style="margin:0.75rem 0 0">
+        <button type="button" class="stop" id="btn-reset-day" title="Move narration, TTS, clips, and final output for this date into archive/reset_*">Reset day (archive artifacts)</button>
+        <div class="help" style="margin-top:0.35rem">
+          Moves <code>narrations/narration&lt;date&gt;*</code>, <code>audio/&lt;date_id&gt;/</code>, <code>movie-images/&lt;date_id&gt;/</code>, and <code>output/*&lt;date_id&gt;*</code> into <code>archive/reset_&lt;date_id&gt;_&lt;timestamp&gt;/</code> so you can start fresh. Does not delete journal XML. If this date is <code>state/run_daily_state.json</code> <code>last_date</code>, reverts to the previous journal entry. CLI: <code>run-daily.py --date … --reset-day</code> or <code>--reset-day-only</code>.
+        </div>
+        <div id="reset-day-status" class="help" style="margin-top:0.35rem;display:none"></div>
+      </div>
+      <div id="phase1-prompt-err" class="status err" style="display:none;margin-top:0.5rem"></div>
+    </div>
+    <div id="wf-section-narration" class="wf-section wf-section--card panel hidden">
+      <div class="produce-subtabs" role="tablist" aria-label="Produce workflow steps">
+        <button type="button" class="produce-subtab active" role="tab" aria-selected="true" id="produce-subtab-script" data-produce-subtab="script">Script &amp; audio</button>
+        <button type="button" class="produce-subtab" role="tab" aria-selected="false" id="produce-subtab-shots" data-produce-subtab="shots">Shots &amp; clips</button>
+        <button type="button" class="produce-subtab" role="tab" aria-selected="false" id="produce-subtab-anchor-preview" data-produce-subtab="anchor-preview">Anchor preview</button>
+      </div>
+      <div id="produce-panel-script" class="produce-panel" role="tabpanel" aria-labelledby="produce-subtab-script">
+        <div id="produce-dialogue-banner" class="produce-dialogue-banner hidden" aria-live="polite"></div>
+        <div class="meta" style="margin-top:0.75rem">
+          Segments — <code id="narration-inline-path">narrations/narration&lt;date&gt;.json</code>
+          <span id="produce-segments-title" class="produce-segments-title"></span>
+        </div>
+        <p id="produce-segments-status" class="help" style="margin:0.35rem 0 0">Pick a journal date above.</p>
+        <div id="produce-segments-host" class="produce-segments-host" style="display:none">
+          <div class="produce-segments-wrap">
+            <table class="produce-segments" id="produce-segments-table" aria-label="Narration segments for this date">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Mode</th>
+                  <th>Subject</th>
+                  <th>Voice / narration</th>
+                  <th>Prompt</th>
+                  <th>Opening frame</th>
+                  <th>Audio</th>
+                  <th>Clip</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="produce-segments-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div style="margin-top:0.75rem">
+          <div class="meta">Audio (TTS)</div>
+          <p class="help" style="margin:0.35rem 0 0.5rem">
+            Writes <code>audio/&lt;date_id&gt;/segments/*.mp3</code>, <code>durations.json</code>, and
+            <code>final.mp3</code> using the <strong>TTS</strong> setting in the run form below. Does not run video.
+            Use <strong>Regenerate all</strong> after editing narration; use per-segment <strong>Regen TTS</strong> in the table for one segment only.
+          </p>
+          <p id="tts-audio-status" class="help tts-audio-status" aria-live="polite"></p>
+          <div class="produce-tts-actions">
+            <button type="button" class="primary" id="btn-generate-tts">Generate TTS</button>
+            <button type="button" id="btn-regenerate-tts-all">Regenerate all TTS</button>
+            <span id="generate-tts-feedback" class="help" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="produce-script-toolbar">
+          <button type="button" id="btn-edit-narration-json">Edit full narration JSON</button>
+          <a href="#" class="linklike" id="produce-link-journal" style="display:none">Regenerate narration on Journal tab</a>
+        </div>
+        <div id="narration-meta-note" class="narration-meta-note" style="display:none"></div>
+        <details id="produce-raw-json-details" class="produce-raw-json-details" style="margin-top:0.75rem">
+          <summary>Raw narration JSON</summary>
+          <pre id="narration-inline-pre" class="desc" style="color:var(--text)">(collapsed — open to load)</pre>
+        </details>
+        <div id="produce-phase1-dialogue-wrap" style="display:none;margin-top:1rem">
+          <div class="meta">
+            Phase 1 — <strong>dialogue polish</strong> (<code>phase1-dialogue</code>). Source:
+            <code id="produce-phase1-dialogue-user-source" style="font-weight:normal"></code>
+          </div>
+          <pre id="produce-phase1-dialogue-prompt-pre" class="desc" style="color:var(--text);max-height:14rem;margin-top:0.35rem"></pre>
+        </div>
+      </div>
+      <div id="produce-panel-shots" class="produce-panel hidden" role="tabpanel" aria-labelledby="produce-subtab-shots" hidden>
+        <div id="conv-master-panel" class="panel conv-master-panel" style="margin-top:0.75rem">
+          <div class="meta">Conversation master (shared backdrop)</div>
+          <p class="help" style="margin-top:0.35rem;margin-bottom:0.5rem">
+            Long-conversation talking_head runs can share one master still split per speaker.
+            Edit <strong>Shared backdrop</strong> below (saved to <code>conversation_micro_arc.shared_setting</code>),
+            then <strong>Save</strong> and <strong>Regenerate master</strong>. With <strong>Solo per speaker</strong>,
+            use each row’s <strong>Scene anchor</strong> button instead.
+          </p>
+          <div class="field conv-master-strategy-row" style="margin-bottom:0.75rem">
+            <label class="main" for="conv-anchor-strategy">Anchor strategy</label>
+            <select id="conv-anchor-strategy" aria-describedby="conv-master-strategy-help">
+              <option value="shared_master_bookend">Shared master + bookend (recommended)</option>
+              <option value="shared_master_mask">Shared master + OmniHuman mask</option>
+              <option value="shared_master_split">Shared master + split</option>
+              <option value="solo_scene_anchor">Solo per speaker</option>
+            </select>
+            <div id="conv-master-strategy-help" class="help" style="margin-top:0.35rem">
+              Bookend: two-shot master on first/last turn, solo crops in the middle.
+            </div>
+          </div>
+          <div id="conv-master-runs-host" class="conv-master-runs-host" style="display:none"></div>
+          <div class="ui-stack conv-master-actions" style="margin-top:0.5rem">
+            <span id="conv-master-job-status" class="help" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="meta" style="margin-top:0.75rem">B-roll library suggestions</div>
+        <div class="help">Uses the journal date and merged <code>narrations/narration&lt;YYYYMMDD&gt;.json</code>. Targets: <code>movie-images/&lt;date_id&gt;/NN.mp4</code>.</div>
+        <div class="field" style="margin-top:0.75rem;margin-bottom:0">
+          <label class="main" style="font-weight:normal"><input type="checkbox" id="brollPreferEnv" /> Prefer environment-sourced clips (down-rank portrait-heavy sources)</label>
+        </div>
+        <div id="broll-err" class="status err" style="display:none;margin-top:0.75rem"></div>
+        <div id="broll-table-host" class="panel" style="display:none;margin-top:0.75rem;padding:0">
+          <div class="meta">Pick <strong>None</strong> or one of up to <strong>5</strong> closest library clips per row. Thumbnails are the first frame of the <strong>source</strong> MP4 (library or <code>movie-images</code>).</div>
+          <div class="broll-table-wrap">
+            <table class="broll" id="broll-table" aria-label="B-roll suggestions">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Narration</th>
+                  <th>Video prompt</th>
+                  <th>Top matches</th>
+                  <th>Scene anchor</th>
+                </tr>
+              </thead>
+              <tbody id="broll-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="broll-summary" class="panel" style="display:none;margin-top:0.75rem">
+          <div class="meta">Replace targets (copy <strong>source</strong> → <strong>target</strong>, then re-run assembly or <strong>Generate video</strong>)</div>
+          <ul id="broll-summary-list" class="latest-links"></ul>
+        </div>
+      </div>
+      <div id="produce-panel-anchor-preview" class="produce-panel hidden" role="tabpanel" aria-labelledby="produce-subtab-anchor-preview" hidden>
+        <div class="meta" style="margin-top:0.75rem">Anchor + TTS preview (before OmniHuman)</div>
+        <p class="help" style="margin-top:0.35rem">
+          Batch-build opening stills for <strong>every</strong> segment under <code>movie-images/&lt;date_id&gt;/anchors/</code>
+          (portrait image-to-image when a portrait exists; otherwise Wan text-to-image for b-roll).
+          Full FAL video uses <strong>image-to-video</strong> when an anchor file exists, else text-to-video.
+          Assemble a cheap preview MP4
+          (<code>output/lewis_clark_anchor_preview_&lt;date&gt;_video.mp4</code>), then run full video.
+          <strong>Build preview clips + assemble</strong> builds any missing anchors first (respects <strong>Force regen anchors</strong>).
+          Requires narration JSON and TTS (<code>audio/&lt;date_id&gt;/final.mp3</code>).
+        </p>
+        <div id="anchor-preview-status" class="help anchor-preview-status" aria-live="polite">Pick a journal date above.</div>
+        <div id="anchor-tts-wrap" class="anchor-tts-wrap" style="margin-top:0.75rem">
+          <p class="help" style="margin:0 0 0.5rem">TTS uses the <strong>TTS</strong> field in the run form. Required before anchor preview assembly; regenerate after script edits.</p>
+          <div class="ui-stack anchor-tts-actions">
+            <button type="button" class="primary" id="btn-anchor-generate-tts">Generate TTS</button>
+            <button type="button" id="btn-anchor-regenerate-tts-all">Regenerate all TTS</button>
+            <span id="anchor-generate-tts-feedback" class="help" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="ui-stack anchor-preview-actions" style="margin-top:0.75rem">
+          <button type="button" id="btn-anchor-build-missing">Build missing anchors</button>
+          <button type="button" id="btn-anchor-build-all">Build all anchors</button>
+          <label class="main" style="font-weight:normal;margin:0"><input type="checkbox" id="anchor-preview-force" /> Force regen anchors</label>
+          <button type="button" id="btn-anchor-assemble">Build preview clips + assemble</button>
+        </div>
+        <p id="anchor-preview-job-status" class="help" style="margin-top:0.35rem" aria-live="polite"></p>
+        <pre id="anchor-preview-issues" class="help anchor-preview-issues hidden" aria-live="polite"></pre>
+        <div class="inline-video-wrap" style="margin-top:1rem">
+          <video id="anchor-preview-video" controls playsinline preload="metadata"></video>
+          <label class="cue-label" for="anchor-preview-cues">Current segment</label>
+          <textarea id="anchor-preview-cues" readonly rows="8" spellcheck="false" aria-live="polite"></textarea>
+        </div>
+        <div class="ui-stack anchor-preview-handoff" style="margin-top:0.75rem">
+          <button type="button" class="primary" id="btn-generate-video-reuse-anchors">Generate full video (reuse anchors)</button>
+          <span id="anchor-preview-handoff-feedback" class="help" aria-live="polite"></span>
+        </div>
+        <p class="help" style="margin-top:0.35rem;margin-bottom:0">
+          Handoff runs <code>narration-to-video.py</code> (on-disk anchors → i2v; missing anchors → t2v) then assembles
+          <code>output/lewis_clark_&lt;date&gt;_video.mp4</code>. Preview MP4 is for review only.
+        </p>
+      </div>
+    </div>
+    <div id="wf-section-video" class="wf-section wf-section--card panel hidden">
+      <div id="youtube-upload-status-wrap" class="youtube-upload-status-panel" aria-live="polite">
+        <div class="meta">YouTube publish backlog</div>
+        <div id="youtube-upload-status-body" class="help youtube-upload-status-body">Loading upload status…</div>
+      </div>
+      <div class="meta" style="margin-top:1rem">Assembled video for the selected date (<code>output/lewis_clark_&lt;date&gt;_video.mp4</code>)</div>
+      <div class="inline-video-wrap">
+        <video id="inline-video" controls playsinline preload="metadata"></video>
+        <label class="cue-label" for="inline-video-cues">Current segment (mode, dialogue, prompts)</label>
+        <textarea id="inline-video-cues" readonly rows="10" spellcheck="false" aria-live="polite"></textarea>
+        <button type="button" id="btn-inline-broll-add" disabled aria-label="Add current narrative segment to B-roll manifest">Add segment to B-roll library</button>
+        <div id="inline-broll-add-feedback" aria-live="polite"></div>
+        <button type="button" id="btn-inline-youtube-upload" disabled aria-label="Upload this date’s video to YouTube using manifest">Upload to YouTube</button>
+        <div id="inline-youtube-upload-feedback" aria-live="polite"></div>
+        <a id="inline-youtube-upload-existing" href="#" target="_blank" rel="noopener noreferrer" style="display:none">Open on YouTube</a>
+        <div class="ui-stack video-assemble-row" style="margin-top:0.75rem">
+          <button type="button" id="btn-assemble-final-video">Assemble final video</button>
+          <span id="assemble-final-feedback" class="help" aria-live="polite"></span>
+        </div>
+        <p class="help" style="margin-top:0.35rem;margin-bottom:0">Remuxes <code>output/lewis_clark_&lt;date&gt;_video.mp4</code> from current segment MP4s + audio. Use after <strong>Scene anchor</strong> or swapping a clip—does not regenerate clips. Or check <strong>Force final assembly</strong> on Run.</p>
+      </div>
+      <details class="pipeline-form-details" style="margin-top:1rem">
+        <summary>FAL run report (last video step)</summary>
+        <p class="help" style="margin-top:0.35rem;margin-bottom:0">Reads <code>movie-images/&lt;date_id&gt;/run_report.json</code> produced when <code>narration-to-video.py</code> runs with vendor <strong>fal</strong>.</p>
+        <button type="button" id="btn-run-report-load">Load run report</button>
+        <pre id="run-report-pre" class="desc" style="margin-top:0.5rem;max-height:18rem;overflow:auto;color:var(--text)">(uses journal picker date)</pre>
+      </details>
+    </div>
+    <div id="pipeline-form-tools" class="hidden" aria-label="Run options and presets">
+      <div id="pipeline-form-presets" class="pipeline-form-presets hidden" aria-label="Form presets"></div>
+      <details id="pipeline-run-summary" class="pipeline-form-details">
+        <summary>Run flag preview</summary>
+        <pre id="pipeline-run-summary-pre" class="desc">(switch away from Journal to see merged values)</pre>
+        <p class="help" style="margin-top:0.35rem;margin-bottom:0">Journal picker supplies <code>--date</code> when the text field is hidden. Exact argv appears in the command line after Run.</p>
+      </details>
+    </div>
+    <div id="wf-section-form-wrap">
+    <form id="f"></form>
+    </div>
+    <div class="actions" id="pipeline-actions-row">
+      <button type="button" class="primary" id="btn-run">Run</button>
+      <button type="button" id="btn-dry">Set dry-run &amp; run</button>
+      <button type="button" class="stop" id="btn-stop" disabled title="Stop the current pipeline (run-daily)">Stop</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="meta">Command and output (last run):</div>
+    <pre id="out">(no run yet)</pre>
+  </div>
+
+  <p class="meta">
+    Options are loaded from <code>pipeline_ui/options.json</code> on each page load.
+    Server: <code>python pipeline_ui/server.py</code> (localhost only).
+  </p>
+  </div><!-- /panel-pipeline -->
+
+  <div id="panel-library" class="app-panel hidden" role="region" aria-label="Library">
+    <p class="desc" style="margin-top:0">Read-only view of long-lived configuration. Edit on disk; reload the page or switch subtabs to pick up changes.</p>
+
+    <div class="library-tabs" role="tablist" aria-label="Library sections">
+      <button type="button" class="library-tab active" role="tab" aria-selected="true" id="library-tab-portraits" data-library-tab="portraits">Portraits</button>
+      <button type="button" class="library-tab" role="tab" aria-selected="false" id="library-tab-prompt-packs" data-library-tab="prompt-packs">Prompt packs</button>
+      <button type="button" class="library-tab" role="tab" aria-selected="false" id="library-tab-diversity" data-library-tab="diversity">Diversity checks</button>
+      <button type="button" class="library-tab" role="tab" aria-selected="false" id="library-tab-week-arcs" data-library-tab="week-arcs">Week arcs</button>
+    </div>
+
+    <div id="library-panel-portraits" class="library-subpanel" role="tabpanel" aria-labelledby="library-tab-portraits">
+    <section class="panel library-section" id="library-portraits-section">
+      <h2>Pipeline character portraits</h2>
+      <p class="help" style="margin:-0.25rem 0 0.5rem">
+        Only portraits the pipeline actually resolves from <code>config/narration_characters.json</code> (pair composites first, then individuals). Images lazy-load as you scroll. Use the arrows, arrow keys, or scroll the strip directly.
+      </p>
+      <p class="library-status" id="library-portraits-status">Loading…</p>
+      <div class="portrait-carousel" id="library-portraits-carousel">
+        <div class="portrait-track" id="library-portraits-track" role="region" aria-label="Pipeline portraits carousel" tabindex="0"></div>
+        <div class="portrait-carousel-controls">
+          <button type="button" id="library-portraits-prev" aria-label="Previous portrait">◀ Prev</button>
+          <button type="button" id="library-portraits-next" aria-label="Next portrait">Next ▶</button>
+          <span class="portrait-counter" id="library-portraits-counter" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+    </div><!-- /library-panel-portraits -->
+
+    <div id="library-panel-prompt-packs" class="library-subpanel hidden" role="tabpanel" aria-labelledby="library-tab-prompt-packs">
+    <section class="panel library-section" id="library-packs-section">
+      <h2>Prompt packs</h2>
+      <p class="help" style="margin:-0.25rem 0 0.35rem">Director packs under <code>prompt_packs/</code> (Phase 1/2 system prompts, <code>pack.json</code>, pack text files).</p>
+      <p class="library-status" id="library-packs-status">Loading…</p>
+      <div id="library-packs-list"></div>
+    </section>
+    </div><!-- /library-panel-prompt-packs -->
+
+    <div id="library-panel-diversity" class="library-subpanel hidden" role="tabpanel" aria-labelledby="library-tab-diversity">
+    <section class="panel library-section" id="library-diversity-section">
+      <h2>Episode diversity checks</h2>
+      <p class="help" style="margin:-0.25rem 0 0.35rem">
+        Lewis &amp; Clark Phase 1 variety hints: <strong>static</strong> rules in <code>pipeline/recent_episode_diversity.py</code> plus
+        <strong>dynamic</strong> LLM audit cache at <code>state/episode_diversity_lewis_clark.json</code>.
+      </p>
+      <p class="library-status" id="library-diversity-status">Loading…</p>
+      <div id="library-diversity-content"></div>
+    </section>
+    </div><!-- /library-panel-diversity -->
+
+    <div id="library-panel-week-arcs" class="library-subpanel hidden" role="tabpanel" aria-labelledby="library-tab-week-arcs">
+    <section class="panel library-section" id="library-week-arcs-section">
+      <h2>Week arcs</h2>
+      <p class="help" style="margin:-0.25rem 0 0.35rem">
+        Saved editorial plans under <code>state/week_arcs/</code>. The LLM picks each arc's own length
+        (<span id="library-week-arcs-bounds">min/max from config/week_arc.json</span>), so arcs vary in day count. Newest first.
+      </p>
+      <p class="library-status" id="library-week-arcs-status">Loading…</p>
+      <div id="library-week-arcs-list"></div>
+    </section>
+    </div><!-- /library-panel-week-arcs -->
+  </div><!-- /panel-library -->
+
+  <div id="modal-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 id="modal-title">Preview</h2>
+        <button type="button" class="close" id="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div id="modal-body-json" class="modal-body" style="display:none">
+        <pre id="modal-pre"></pre>
+      </div>
+      <div id="modal-body-video" class="modal-body" style="display:none">
+        <video id="modal-video" controls playsinline preload="metadata"></video>
+        <label class="cue-label" for="modal-video-cues">Current segment (mode, dialogue, prompts)</label>
+        <textarea id="modal-video-cues" readonly rows="10" spellcheck="false" aria-live="polite"></textarea>
+        <button type="button" id="btn-broll-add" disabled aria-label="Add current narrative segment to B-roll manifest">Add segment to B-roll library</button>
+        <div id="broll-add-feedback" aria-live="polite"></div>
+        <button type="button" id="btn-youtube-upload" disabled aria-label="Upload latest video to YouTube using manifest">Upload to YouTube</button>
+        <div id="youtube-upload-feedback" aria-live="polite"></div>
+        <a id="youtube-upload-existing" href="#" target="_blank" rel="noopener noreferrer" style="display:none">Open on YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="broll-thumb-lightbox" aria-hidden="true">
+    <img id="broll-thumb-lightbox-img" alt="Enlarged B-roll thumbnail" />
+  </div>
+
+  <div id="broll-prompt-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div id="broll-prompt-dialog" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="broll-prompt-editor-title">
+      <div class="modal-header">
+        <h2 id="broll-prompt-editor-title">Edit video prompt</h2>
+        <button type="button" class="close" id="broll-prompt-editor-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="help" style="margin-bottom:0.5rem">Click outside, ×, or press Escape to close. If you changed the narration, video prompt, talking-head prompt, or opening frame text, it is saved to <code>narrations/narration&lt;date&gt;.json</code> before closing.</div>
+        <div id="broll-prompt-delete-hint" class="help" style="margin-bottom:0.5rem;display:none">To <strong>remove</strong> a segment, replace the text with <code>DELETEME</code> (narration or video prompt). At least one segment must remain.</div>
+        <div id="broll-prompt-opening-frame-hint" class="help" style="margin-bottom:0.5rem;display:none"><code>opening_frame</code> drives the scene-anchor still (pose + place). Rebuild the anchor / talking-head clip after saving so video picks up the change.</div>
+        <textarea id="broll-prompt-editor-ta" spellcheck="true" aria-label="Video prompt text"></textarea>
+        <div id="broll-prompt-editor-status" class="status" style="display:none;margin-top:0.5rem" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="episode-state-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div id="episode-state-dialog" class="modal-dialog modal-dialog-wide" role="dialog" aria-modal="true" aria-labelledby="episode-state-title">
+      <div class="modal-header">
+        <h2 id="episode-state-title">Pipeline state</h2>
+        <button type="button" class="close" id="episode-state-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="episode-state-summary" class="episode-state-summary desc"></div>
+        <pre id="episode-state-pre" class="desc" style="margin-top:0.75rem;max-height:55vh;overflow:auto;color:var(--text)"></pre>
+      </div>
+    </div>
+  </div>
+
+  <div id="narration-json-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div id="narration-json-dialog" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="narration-json-title">
+      <div class="modal-header">
+        <h2 id="narration-json-title">Edit narration JSON</h2>
+        <button type="button" class="close" id="narration-json-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="help" style="margin-bottom:0.5rem">
+          Edit the full JSON for this date (including title and metadata). Save validates JSON then writes
+          <code>narrations/narration&lt;date&gt;.json</code>.
+        </div>
+        <textarea id="narration-json-editor-ta" spellcheck="false" aria-label="Narration JSON text" style="width:100%;min-height:24rem;font-family:Consolas,Menlo,Monaco,monospace;font-size:12px"></textarea>
+        <div class="ui-stack" style="margin-top:0.5rem">
+          <button type="button" id="narration-json-validate">Validate JSON</button>
+          <button type="button" id="narration-json-save">Save JSON</button>
+        </div>
+        <div id="narration-json-status" class="status" style="display:none;margin-top:0.5rem" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="anchor-scene-lightbox" class="anchor-scene-lightbox" aria-hidden="true">
+    <div class="anchor-scene-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Scene anchor zoom">
+      <button type="button" class="anchor-scene-lightbox-close" id="anchor-scene-lightbox-close" aria-label="Close">&times;</button>
+      <div class="anchor-scene-zoom-wrap" id="anchor-scene-zoom-wrap">
+        <img id="anchor-scene-lightbox-img" alt="Scene anchor enlarged" draggable="false" />
+      </div>
+      <div class="anchor-scene-zoom-controls">
+        <button type="button" class="linklike" id="anchor-zoom-out" title="Zoom out">−</button>
+        <span id="anchor-zoom-pct">100%</span>
+        <button type="button" class="linklike" id="anchor-zoom-in" title="Zoom in">+</button>
+        <button type="button" class="linklike" id="anchor-zoom-reset" title="Reset zoom">Reset</button>
+        <span class="help" style="margin-left:0.5rem">Scroll wheel to zoom</span>
+      </div>
+    </div>
+  </div>
+
+  <footer id="ui-version-footer" class="ui-version-footer" aria-label="Pipeline UI version">
+    <button type="button" id="ui-version-btn" class="ui-version-btn" title="Click to verify UI version alignment with disk">UI …</button>
+    <div id="ui-version-panel" class="ui-version-panel" hidden>
+      <div id="ui-version-status" class="ui-version-status">Click to verify.</div>
+      <pre id="ui-version-detail" class="ui-version-detail"></pre>
+      <div class="ui-version-actions">
+        <button type="button" id="ui-version-refresh" class="ui-version-action">Re-check</button>
+        <button type="button" id="ui-version-restart" class="ui-version-action">Restart server</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/core.js"></script>
+  <script src="/static/js/workflow.js"></script>
+  <script src="/static/js/broll.js"></script>
+  <script src="/static/js/video.js"></script>
+  <script src="/static/js/episode_state.js"></script>
+  <script src="/static/js/narration.js"></script>
+  <script src="/static/js/journal.js"></script>
+  <script src="/static/js/tts.js"></script>
+  <script src="/static/js/produce.js"></script>
+  <script src="/static/js/anchor_preview.js"></script>
+  <script src="/static/js/library.js"></script>
+  <script src="/static/js/version.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script>
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopRunStatusPolling();
+      } else {
+        syncRunStatus();
+        startRunStatusPollingIfVisible();
+      }
+    });
+
+    load();
+    // Re-sync Run/Generate/Stop when /api/status drifts other tabs/long runs finished without this page seeing it.
+    if (!document.hidden) startRunStatusPollingIfVisible();
+  </script>
+</body>
+</html>

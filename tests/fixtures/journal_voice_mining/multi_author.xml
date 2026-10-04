@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>Test</title></titleStmt>
+      <sourceDesc>
+        <bibl>
+          <author xml:id="wc">William Clark</author>
+          <author xml:id="ml">Meriwether Lewis</author>
+        </bibl>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="entry">
+        <sp who="#wc">
+          <speaker>Clark</speaker>
+          <p>Line the boats for a clean landing before the sandbar catches us.</p>
+        </sp>
+        <sp who="#ml">
+          <speaker>Lewis</speaker>
+          <p>I have set the instruments again before dawn. Several species observed near camp.</p>
+        </sp>
+      </div>
+    </body>
+  </text>
+</TEI>

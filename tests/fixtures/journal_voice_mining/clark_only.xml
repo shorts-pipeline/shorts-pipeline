@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>Test</title></titleStmt>
+      <sourceDesc>
+        <bibl>
+          <author xml:id="wc">William Clark</author>
+        </bibl>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="entry">
+        <sp who="#wc">
+          <speaker>Clark</speaker>
+          <p>Set out early. Passed the mouth of Bear creek 25 yds wide at 6 Miles.</p>
+          <p>The river rises fast. Course N 54 W 2 miles to a point Lb Side.</p>
+        </sp>
+      </div>
+    </body>
+  </text>
+</TEI>

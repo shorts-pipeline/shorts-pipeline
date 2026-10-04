@@ -1,0 +1,6 @@
+{
+  "first_anchor_date_id": "18040705",
+  "week_journal_days_min": 4,
+  "week_journal_days_max": 10,
+  "plan_model": "gpt-4o"
+}

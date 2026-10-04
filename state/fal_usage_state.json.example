@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "last_end_exclusive_utc": null,
+  "last_fetch_utc": null,
+  "csv_path": "logs\\fal_usage.csv",
+  "rows_appended": 0
+}

@@ -1,0 +1,86 @@
+# Lewis & Clark journal voice mining report
+
+Generated: 2026-05-26T06:14:36.598507+00:00
+Journal dir: `tests\fixtures\journal_voice_mining`
+
+## Corpus coverage
+
+- XML files found: **3**
+- Parsed: **3**
+- Files with Lewis or Clark paragraphs: **3**
+- Lewis tokens: **26** (3 paragraphs)
+- Clark tokens: **21** (3 paragraphs)
+- Unmapped paragraphs: **0**
+
+## Attribution caveats
+
+- Labels follow pipeline TEI rules (author header + <sp who> / <speaker> fallback).
+- Some days repeat one @who across different <speaker> names; speaker labels are used when detected.
+- Clark's corpus is often larger than Lewis's on the outbound journal leg.
+- Mined diction is written journal prose—adapt for present-tense spoken dialogue, do not paste verbatim.
+
+## Comparison to curated dialogue_profile
+
+### Meriwether Lewis (`lewis`)
+
+- In both curated and mined: `considerable, latitude, observed, species, specimens`
+- Only in curated `habitual_words`: `appeared to be, further, longitude`
+- Only in mined distinctive (top): `again, along, altitudes, appeared, bank, dawn, equal, have, instruments, near, plants, recorded, several, stirred, took`
+
+**Spoken dialogue hints (from mining):**
+- Spoken polish: favor short observational clauses (instruments, species, terrain)—not long past-tense journal chains.
+- Sprinkle natural-history diction sparingly; avoid copying dense list-of-specimens rhythm into every line.
+- Journal sentence shape (median ~5.0 tokens/sentence): can shorten for in-scene present tense.
+
+**Sentence shape:** median 5.0 tokens/sentence; mean 5.2; 5 sentences sampled.
+
+**Distinctive terms vs other captain (log-odds, top 15):**
+- `several` (count 2, other 0, log-odds 1.405)
+- `observed` (count 2, other 0, log-odds 1.405)
+- `species` (count 2, other 0, log-odds 1.405)
+- `dawn` (count 1, other 0, log-odds 0.894)
+- `considerable` (count 1, other 0, log-odds 0.894)
+- `took` (count 1, other 0, log-odds 0.894)
+- `along` (count 1, other 0, log-odds 0.894)
+- `specimens` (count 1, other 0, log-odds 0.894)
+- `equal` (count 1, other 0, log-odds 0.894)
+- `again` (count 1, other 0, log-odds 0.894)
+- `appeared` (count 1, other 0, log-odds 0.894)
+- `recorded` (count 1, other 0, log-odds 0.894)
+- `latitude` (count 1, other 0, log-odds 0.894)
+- `altitudes` (count 1, other 0, log-odds 0.894)
+- `bank` (count 1, other 0, log-odds 0.894)
+
+### William Clark (`clark`)
+
+- In both curated and mined: `creek`
+- Only in curated `habitual_words`: `buffaloe, course, detachment, men, miles, musquetoes, party, river`
+- Only in mined distinctive (top): `25, 54, bear, boats, catches, clean, early, fast, landing, lb, line, mouth, point, rises, sandbar, side, us, wide, yds`
+
+**Spoken dialogue hints (from mining):**
+- Spoken polish: favor practical movement and river/camp logistics—mileage and disposition as fragments, not surveyor field notes.
+- Keep Kentucky directness; light journal spelling flavor only if the draft already supports it.
+- Journal sentence shape (median ~4.0 tokens/sentence): often shorter than Lewis—use that for punchy orders.
+
+**Sentence shape:** median 4.0 tokens/sentence; mean 4.2; 5 sentences sampled.
+
+**Distinctive terms vs other captain (log-odds, top 15):**
+- `line` (count 1, other 0, log-odds 1.303)
+- `25` (count 1, other 0, log-odds 1.303)
+- `catches` (count 1, other 0, log-odds 1.303)
+- `54` (count 1, other 0, log-odds 1.303)
+- `creek` (count 1, other 0, log-odds 1.303)
+- `early` (count 1, other 0, log-odds 1.303)
+- `boats` (count 1, other 0, log-odds 1.303)
+- `landing` (count 1, other 0, log-odds 1.303)
+- `us` (count 1, other 0, log-odds 1.303)
+- `yds` (count 1, other 0, log-odds 1.303)
+- `sandbar` (count 1, other 0, log-odds 1.303)
+- `clean` (count 1, other 0, log-odds 1.303)
+- `rises` (count 1, other 0, log-odds 1.303)
+- `bear` (count 1, other 0, log-odds 1.303)
+- `mouth` (count 1, other 0, log-odds 1.303)
+
+## Next steps
+
+If distinctive terms look useful, curate ~15–25 into `dialogue_profile.habitual_words` in `config/narration_characters.json`—do not inject the full frequency tables into the polish pass.

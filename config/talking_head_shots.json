@@ -1,0 +1,16 @@
+{
+  "templates": {
+    "ots_listener_shoulders": "Framing: over-the-listener shoulders from behind/side; foreground shoulder and back-of-head softly out of focus; primary speaker sharp in three-quarter toward the listener eyeline—not into lens; period camp light; quiet breathing in silences.",
+    "ots_partner_silhouette": "Framing: primary speaker favored; partner as dark shoulder or silhouette on opposite frame edge facing the speaker; campfire or open sky separation; keep partner face mostly hidden or unreadable so lip-sync reads on the primary only.",
+    "medium_neutral_hold": "Framing: medium shot, neutral shoulders-up; eyes toward lens or slight three-quarter; minimal head motion during silences; steady breathing.",
+    "waist_up_reflective": "Framing: waist-up in frame when possible; reflective stillness before speaking; hands quiet at sides or one gesture held.",
+    "intimate_confession": "Framing: closer medium; softer eye-line (not direct stare); allow micro-expressions during pre-speech hold.",
+    "directive_orders": "Framing: stable medium; chin level; clear forward eye-line; crisp onset when speech begins after a short still hold."
+  },
+  "archetypes": {
+    "confession": "intimate_confession",
+    "orders": "directive_orders",
+    "reflection": "waist_up_reflective",
+    "default": "medium_neutral_hold"
+  }
+}

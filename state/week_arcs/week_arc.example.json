@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "week_id": "18040705",
+  "week_start_date_id": "18040705",
+  "week_end_date_id": "18040711",
+  "journal_date_ids": [
+    "18040705",
+    "18040706",
+    "18040707",
+    "18040708",
+    "18040709",
+    "18040710",
+    "18040711"
+  ],
+  "created_at": "2026-08-29T00:00:00Z",
+  "model": "gpt-4o",
+  "through_line": "River anxiety builds as the corps pushes upstream; Clark carries logistics while Lewis reads the sky.",
+  "avoid_this_week": [
+    "repeating generic dawn hooks",
+    "another boat-repair-only episode"
+  ],
+  "days": {
+    "18040705": {
+      "role": "setup",
+      "recommended_mode": "narration",
+      "speakers": null,
+      "day_focus": "Establish camp and current river conditions",
+      "reason": "Thin travel log; narrator sets the week"
+    },
+    "18040706": {
+      "role": "deepen",
+      "recommended_mode": "dialogue",
+      "speakers": ["clark", "ordway"],
+      "day_focus": "Route and crew tension",
+      "reason": "Journal names both in a planning beat"
+    },
+    "18040707": {
+      "role": "contrast",
+      "recommended_mode": "narration",
+      "speakers": null,
+      "day_focus": "Wildlife and landscape observation",
+      "reason": "Breather day; visual B-roll forward"
+    },
+    "18040708": {
+      "role": "build",
+      "recommended_mode": "dialogue",
+      "speakers": ["lewis", "clark"],
+      "day_focus": "Shared uncertainty about timing",
+      "reason": "Co-presence without enough material for long ping-pong"
+    },
+    "18040709": {
+      "role": "payoff",
+      "recommended_mode": "long_conversation",
+      "speakers": ["lewis", "clark"],
+      "day_focus": "Decision that closes the week's arc",
+      "reason": "Joint planning language supports sustained exchange"
+    },
+    "18040710": {
+      "role": "release",
+      "recommended_mode": "narration",
+      "speakers": null,
+      "day_focus": "Aftermath and forward motion",
+      "reason": "Let the prior day's decision land"
+    },
+    "18040711": {
+      "role": "hold",
+      "recommended_mode": "narration",
+      "speakers": null,
+      "day_focus": "Routine progress; quiet close to the bundle",
+      "reason": "Light entry; avoid talking-head fatigue"
+    }
+  }
+}

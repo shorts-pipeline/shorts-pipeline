@@ -1,0 +1,33 @@
+# Core pipeline (narration, TTS, map intro, assembly)
+# Install everything:  pip install -r requirements.txt -r requirements-youtube.txt
+# Then (one-time):     playwright install chromium
+#
+# Versions are pinned to the last known-good venv. Bump deliberately: change a
+# pin, rebuild the venv, run `scripts/check.ps1` (ruff + full test suite), commit.
+# See ai-plans/repo-ci-lint-and-pinning.md.
+
+# Narration (OpenAI) and optional OpenAI TTS
+openai==2.21.0
+
+# Narration (optional: Claude via generate-narration-two-phase.py --llm-provider claude)
+anthropic==1.5.0
+
+# Audio + video processing
+ffmpeg-python==0.2.0
+pyttsx3==2.99
+
+# Map intro (folium, geopy, Playwright, Pillow)
+folium==0.20.0
+geopy==2.4.1
+playwright==1.58.0
+Pillow==12.1.1
+
+# Scraping and HTTP
+requests==2.32.5
+
+# Optional: load .env
+python-dotenv==1.2.1
+
+# Video vendors (install at least one for AI clips)
+fal-client==0.13.1          # fal.ai Wan 2.5 (default in run-daily)
+# google-genai             # Uncomment + pin (==X.Y.Z) when enabling the Google Veo vendor

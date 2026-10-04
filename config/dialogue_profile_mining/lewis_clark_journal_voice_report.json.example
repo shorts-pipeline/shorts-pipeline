@@ -1,0 +1,762 @@
+{
+  "generated_at": "2026-05-26T06:14:36.598507+00:00",
+  "journal_dir": "tests\\fixtures\\journal_voice_mining",
+  "corpus_coverage": {
+    "xml_files_found": 3,
+    "xml_files_parsed": 3,
+    "files_with_lewis_or_clark_paragraphs": 3,
+    "paragraphs_lewis": 3,
+    "paragraphs_clark": 3,
+    "paragraphs_unmapped": 0,
+    "token_count_lewis": 26,
+    "token_count_clark": 21,
+    "token_count_unmapped": 0
+  },
+  "attribution_notes": [
+    "Labels follow pipeline TEI rules (author header + <sp who> / <speaker> fallback).",
+    "Some days repeat one @who across different <speaker> names; speaker labels are used when detected.",
+    "Clark's corpus is often larger than Lewis's on the outbound journal leg.",
+    "Mined diction is written journal prose—adapt for present-tense spoken dialogue, do not paste verbatim."
+  ],
+  "tei_author_ids_seen": {
+    "wc": 2,
+    "ml": 2
+  },
+  "voice_labels_seen": {
+    "William Clark": 3,
+    "Meriwether Lewis": 3
+  },
+  "unmapped_voice_labels_top": {},
+  "authors": {
+    "lewis": {
+      "token_count": 26,
+      "paragraph_count": 3,
+      "sentence_stats": {
+        "sentence_count": 5,
+        "mean_tokens_per_sentence": 5.2,
+        "median_tokens_per_sentence": 5.0,
+        "semicolons_per_1k_words": 0.0,
+        "ampersands_per_1k_words": 0.0
+      },
+      "top_unigrams": [
+        {
+          "term": "observed",
+          "count": 2
+        },
+        {
+          "term": "several",
+          "count": 2
+        },
+        {
+          "term": "species",
+          "count": 2
+        },
+        {
+          "term": "before",
+          "count": 2
+        },
+        {
+          "term": "plants",
+          "count": 1
+        },
+        {
+          "term": "along",
+          "count": 1
+        },
+        {
+          "term": "bank",
+          "count": 1
+        },
+        {
+          "term": "specimens",
+          "count": 1
+        },
+        {
+          "term": "appeared",
+          "count": 1
+        },
+        {
+          "term": "considerable",
+          "count": 1
+        },
+        {
+          "term": "took",
+          "count": 1
+        },
+        {
+          "term": "equal",
+          "count": 1
+        },
+        {
+          "term": "altitudes",
+          "count": 1
+        },
+        {
+          "term": "recorded",
+          "count": 1
+        },
+        {
+          "term": "latitude",
+          "count": 1
+        },
+        {
+          "term": "octant",
+          "count": 1
+        },
+        {
+          "term": "stirred",
+          "count": 1
+        },
+        {
+          "term": "have",
+          "count": 1
+        },
+        {
+          "term": "instruments",
+          "count": 1
+        },
+        {
+          "term": "again",
+          "count": 1
+        }
+      ],
+      "top_bigrams": [
+        {
+          "term": "several species",
+          "count": 2
+        },
+        {
+          "term": "observed several",
+          "count": 1
+        },
+        {
+          "term": "species plants",
+          "count": 1
+        },
+        {
+          "term": "plants along",
+          "count": 1
+        },
+        {
+          "term": "along bank",
+          "count": 1
+        },
+        {
+          "term": "bank specimens",
+          "count": 1
+        },
+        {
+          "term": "specimens appeared",
+          "count": 1
+        },
+        {
+          "term": "appeared considerable",
+          "count": 1
+        },
+        {
+          "term": "took equal",
+          "count": 1
+        },
+        {
+          "term": "equal altitudes",
+          "count": 1
+        },
+        {
+          "term": "altitudes recorded",
+          "count": 1
+        },
+        {
+          "term": "recorded latitude",
+          "count": 1
+        },
+        {
+          "term": "latitude octant",
+          "count": 1
+        },
+        {
+          "term": "octant before",
+          "count": 1
+        },
+        {
+          "term": "before stirred",
+          "count": 1
+        },
+        {
+          "term": "have instruments",
+          "count": 1
+        },
+        {
+          "term": "instruments again",
+          "count": 1
+        },
+        {
+          "term": "again before",
+          "count": 1
+        },
+        {
+          "term": "before dawn",
+          "count": 1
+        },
+        {
+          "term": "dawn several",
+          "count": 1
+        }
+      ],
+      "distinctive_vs_other": [
+        {
+          "term": "several",
+          "log_odds_vs_other": 1.405,
+          "count": 2,
+          "other_count": 0
+        },
+        {
+          "term": "observed",
+          "log_odds_vs_other": 1.405,
+          "count": 2,
+          "other_count": 0
+        },
+        {
+          "term": "species",
+          "log_odds_vs_other": 1.405,
+          "count": 2,
+          "other_count": 0
+        },
+        {
+          "term": "dawn",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "considerable",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "took",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "along",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "specimens",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "equal",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "again",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "appeared",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "recorded",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "latitude",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "altitudes",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "bank",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "stirred",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "instruments",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "have",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "plants",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "near",
+          "log_odds_vs_other": 0.894,
+          "count": 1,
+          "other_count": 0
+        }
+      ],
+      "spoken_dialogue_hints": [
+        "Spoken polish: favor short observational clauses (instruments, species, terrain)—not long past-tense journal chains.",
+        "Sprinkle natural-history diction sparingly; avoid copying dense list-of-specimens rhythm into every line.",
+        "Journal sentence shape (median ~5.0 tokens/sentence): can shorten for in-scene present tense."
+      ]
+    },
+    "clark": {
+      "token_count": 21,
+      "paragraph_count": 3,
+      "sentence_stats": {
+        "sentence_count": 5,
+        "mean_tokens_per_sentence": 4.2,
+        "median_tokens_per_sentence": 4.0,
+        "semicolons_per_1k_words": 0.0,
+        "ampersands_per_1k_words": 0.0
+      },
+      "top_unigrams": [
+        {
+          "term": "early",
+          "count": 1
+        },
+        {
+          "term": "mouth",
+          "count": 1
+        },
+        {
+          "term": "bear",
+          "count": 1
+        },
+        {
+          "term": "creek",
+          "count": 1
+        },
+        {
+          "term": "25",
+          "count": 1
+        },
+        {
+          "term": "yds",
+          "count": 1
+        },
+        {
+          "term": "wide",
+          "count": 1
+        },
+        {
+          "term": "rises",
+          "count": 1
+        },
+        {
+          "term": "fast",
+          "count": 1
+        },
+        {
+          "term": "54",
+          "count": 1
+        },
+        {
+          "term": "point",
+          "count": 1
+        },
+        {
+          "term": "lb",
+          "count": 1
+        },
+        {
+          "term": "side",
+          "count": 1
+        },
+        {
+          "term": "line",
+          "count": 1
+        },
+        {
+          "term": "boats",
+          "count": 1
+        },
+        {
+          "term": "clean",
+          "count": 1
+        },
+        {
+          "term": "landing",
+          "count": 1
+        },
+        {
+          "term": "before",
+          "count": 1
+        },
+        {
+          "term": "sandbar",
+          "count": 1
+        },
+        {
+          "term": "catches",
+          "count": 1
+        }
+      ],
+      "top_bigrams": [
+        {
+          "term": "early mouth",
+          "count": 1
+        },
+        {
+          "term": "mouth bear",
+          "count": 1
+        },
+        {
+          "term": "bear creek",
+          "count": 1
+        },
+        {
+          "term": "creek 25",
+          "count": 1
+        },
+        {
+          "term": "25 yds",
+          "count": 1
+        },
+        {
+          "term": "yds wide",
+          "count": 1
+        },
+        {
+          "term": "rises fast",
+          "count": 1
+        },
+        {
+          "term": "fast 54",
+          "count": 1
+        },
+        {
+          "term": "54 point",
+          "count": 1
+        },
+        {
+          "term": "point lb",
+          "count": 1
+        },
+        {
+          "term": "lb side",
+          "count": 1
+        },
+        {
+          "term": "line boats",
+          "count": 1
+        },
+        {
+          "term": "boats clean",
+          "count": 1
+        },
+        {
+          "term": "clean landing",
+          "count": 1
+        },
+        {
+          "term": "landing before",
+          "count": 1
+        },
+        {
+          "term": "before sandbar",
+          "count": 1
+        },
+        {
+          "term": "sandbar catches",
+          "count": 1
+        },
+        {
+          "term": "catches us",
+          "count": 1
+        }
+      ],
+      "distinctive_vs_other": [
+        {
+          "term": "line",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "25",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "catches",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "54",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "creek",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "early",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "boats",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "landing",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "us",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "yds",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "sandbar",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "clean",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "rises",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "bear",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "mouth",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "point",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "side",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "wide",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "fast",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        },
+        {
+          "term": "lb",
+          "log_odds_vs_other": 1.303,
+          "count": 1,
+          "other_count": 0
+        }
+      ],
+      "spoken_dialogue_hints": [
+        "Spoken polish: favor practical movement and river/camp logistics—mileage and disposition as fragments, not surveyor field notes.",
+        "Keep Kentucky directness; light journal spelling flavor only if the draft already supports it.",
+        "Journal sentence shape (median ~4.0 tokens/sentence): often shorter than Lewis—use that for punchy orders."
+      ]
+    }
+  },
+  "comparison_to_curated": {
+    "lewis": {
+      "curated_habitual_words": [
+        "specimens",
+        "observed",
+        "considerable",
+        "species",
+        "latitude",
+        "longitude",
+        "further",
+        "appeared to be"
+      ],
+      "mined_distinctive_terms": [
+        "several",
+        "observed",
+        "species",
+        "dawn",
+        "considerable",
+        "took",
+        "along",
+        "specimens",
+        "equal",
+        "again",
+        "appeared",
+        "recorded",
+        "latitude",
+        "altitudes",
+        "bank",
+        "stirred",
+        "instruments",
+        "have",
+        "plants",
+        "near"
+      ],
+      "in_both": [
+        "considerable",
+        "latitude",
+        "observed",
+        "species",
+        "specimens"
+      ],
+      "only_in_curated": [
+        "appeared to be",
+        "further",
+        "longitude"
+      ],
+      "only_in_mined": [
+        "again",
+        "along",
+        "altitudes",
+        "appeared",
+        "bank",
+        "dawn",
+        "equal",
+        "have",
+        "instruments",
+        "near",
+        "plants",
+        "recorded",
+        "several",
+        "stirred",
+        "took"
+      ]
+    },
+    "clark": {
+      "curated_habitual_words": [
+        "river",
+        "creek",
+        "miles",
+        "course",
+        "party",
+        "men",
+        "detachment",
+        "musquetoes",
+        "buffaloe"
+      ],
+      "mined_distinctive_terms": [
+        "line",
+        "25",
+        "catches",
+        "54",
+        "creek",
+        "early",
+        "boats",
+        "landing",
+        "us",
+        "yds",
+        "sandbar",
+        "clean",
+        "rises",
+        "bear",
+        "mouth",
+        "point",
+        "side",
+        "wide",
+        "fast",
+        "lb"
+      ],
+      "in_both": [
+        "creek"
+      ],
+      "only_in_curated": [
+        "buffaloe",
+        "course",
+        "detachment",
+        "men",
+        "miles",
+        "musquetoes",
+        "party",
+        "river"
+      ],
+      "only_in_mined": [
+        "25",
+        "54",
+        "bear",
+        "boats",
+        "catches",
+        "clean",
+        "early",
+        "fast",
+        "landing",
+        "lb",
+        "line",
+        "mouth",
+        "point",
+        "rises",
+        "sandbar",
+        "side",
+        "us",
+        "wide",
+        "yds"
+      ]
+    }
+  }
+}

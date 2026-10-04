@@ -1,0 +1,1 @@
+Weapon policy empty_hands: do not copy musket, rifle, or longarm from the reference portrait unless the opening frame explicitly calls for it. Hands empty or holding only the single prop named in the opening frame; any longarm grounded out of frame or absent.

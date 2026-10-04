@@ -1,0 +1,7 @@
+# Developer tooling (not needed to run the pipeline).
+#   pip install -r requirements-dev.txt
+# Config for both lives in pyproject.toml. See scripts/check.ps1 / scripts/check.sh
+# and ai-plans/repo-ci-lint-and-pinning.md.
+
+pytest==9.0.3
+ruff==0.16.6

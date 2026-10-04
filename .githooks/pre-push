@@ -1,0 +1,5 @@
+#!/bin/sh
+# Runs ruff + the full test suite before every push.
+# Enable (once per clone):  git config core.hooksPath .githooks
+# Bypass in an emergency:    git push --no-verify
+exec scripts/check.sh

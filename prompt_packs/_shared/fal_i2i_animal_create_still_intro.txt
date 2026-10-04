@@ -1,0 +1,1 @@
+Create a single still opening frame image. Keep the animal from the reference portrait exactly the same species, breed, build, and fur, rendered as a real animal on all fours. Only its pose and the surroundings follow the opening frame; the reference portrait sets its body, head, and coat.

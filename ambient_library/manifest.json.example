@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "default_tag": "prairie_wind",
+  "highpass_hz": 120,
+  "ambience_level_gain_db": {
+    "light": -22,
+    "moderate": -16
+  },
+  "tags": {
+    "campfire": {
+      "file": "campfire.wav",
+      "gain_db_offset": 0,
+      "notes": "Crackling fire loop (wood-burning / fireplace)."
+    },
+    "chirping_birds": {
+      "file": "chirping_birds.wav",
+      "gain_db_offset": 0,
+      "notes": "Daytime spring bird chorus (Freesound 345852). See CREDITS-ambient.md; add chirping_birds.wav locally after clone."
+    },
+    "creek": {
+      "file": "creek.wav",
+      "gain_db_offset": 0,
+      "notes": "Small flowing water (rubberduck water_flowing loop)."
+    },
+    "distant_thunder": {
+      "file": "distant_thunder.wav",
+      "gain_db_offset": 0,
+      "notes": "Distant thunder with rain."
+    },
+    "evening_insects": {
+      "file": "evening_insects.wav",
+      "gain_db_offset": 0,
+      "notes": "Night crickets (loopable ~11s bed)."
+    },
+    "forest": {
+      "file": "forest.wav",
+      "gain_db_offset": 0,
+      "notes": "Forest ambience with light birds."
+    },
+    "hailstorm": {
+      "file": "hailstorm.wav",
+      "gain_db_offset": 0,
+      "notes": "Outdoor hail under shelter."
+    },
+    "prairie_wind": {
+      "file": "prairie_wind.wav",
+      "gain_db_offset": 0,
+      "notes": "Gentle open-air wind (synthesized loop)."
+    },
+    "river": {
+      "file": "river.wav",
+      "gain_db_offset": 0,
+      "notes": "Large moving water surface (trimmed field recording)."
+    },
+    "spring_frogs": {
+      "file": "spring_frogs.wav",
+      "gain_db_offset": 0,
+      "notes": "Frog croaks."
+    },
+    "wetland": {
+      "file": "wetland.wav",
+      "gain_db_offset": 0,
+      "notes": "Marshy water + subtle bubbles (mixed loops)."
+    }
+  }
+}

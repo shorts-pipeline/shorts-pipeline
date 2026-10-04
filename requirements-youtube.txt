@@ -1,0 +1,4 @@
+# YouTube upload (OAuth) — install with: pip install -r requirements-youtube.txt
+# Pinned to the last known-good venv; bump deliberately (see requirements.txt header).
+google-api-python-client==2.190.0
+google-auth-oauthlib==1.2.4

@@ -1,0 +1,2 @@
+Create a single still opening frame image. Match face, general likeness, and garment identity (coat color, facings, insignia, hat) to the reference portrait; pose, body position, gaze/eyeline, and held objects follow the opening frame—not the reference image. The opening frame may add wear condition (mud, wet, worn) to that same garment, or override the garment match entirely when it explicitly states the coat or hat is removed, set aside, or absent (e.g. swimming, bathing).
+

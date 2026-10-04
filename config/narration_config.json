@@ -1,0 +1,217 @@
+{
+  "allow_stylization": true,
+  "stylization_probability": 1,
+  "style_diversity": {
+    "enabled": true,
+    "recent_window": 3,
+    "avoid_immediate_reuse": 2,
+    "default_theme_probability_mass_boost": 0.2
+  },
+  "episode_diversity": {
+    "enabled": true,
+    "recent_window": 5,
+    "_comment": "Fallback for Lewis & Clark packs only when pack.json omits episode_diversity; non-LC packs ignore this."
+  },
+  "style_mode_policy": {
+    "narrator_only_styles": [],
+    "dialogue_only_styles": []
+  },
+  "character_injection": {
+    "enabled": true,
+    "max_per_episode": 6,
+    "max_per_character": 3
+  },
+  "voice_by_speaker": {
+    "lewis": "onyx",
+    "clark": "ash",
+    "york": "echo",
+    "sacagawea": "nova",
+    "charbonneau": "fable",
+    "narrator": "onyx"
+  },
+  "fal_scene_anchor_quality": {
+    "enabled": true,
+    "uniform_white_top_min": 0.55,
+    "uniform_white_bottom_min": 0.45,
+    "mostly_white_frame_min": 0.65
+  },
+  "fal_conversation_scene_anchor": {
+    "enabled": true,
+    "strategy": "shared_master_bookend",
+    "master_reference_mode": "dual_portrait",
+    "master_split_crop_width_fraction": 0.45,
+    "master_split_right_shift_fraction": 0.07,
+    "master_width_multiplier": 2,
+    "anchor_face_y_fraction": 0.22,
+    "anchor_face_window_height_fraction": 0.52,
+    "mask_ellipse_width_fraction": 0.26,
+    "mask_ellipse_height_fraction": 0.34,
+    "composite_gap_px": 8
+  },
+  "fal_broll_scene_anchor": {
+    "enabled": false,
+    "_comment": "When false (default), B-roll Wan uses scene anchors only for segments with a portrait-backed reference_character_id (lewis, clark, drouillard, york, composites, etc.). Segments without a clear character use text-to-video. Set enabled true to allow anchors on all B-roll segments."
+  },
+  "_comment_heygen_spike": "SPIKE 2026-07-18: primary=HeyGen Avatar4 (~$0.10/s). BACKOUT: set fal_talking_head_model to fal-ai/bytedance/omnihuman/v1.5 and fal_talking_head_fallback_model to fal-ai/sadtalker, then delete talking-head NN.mp4 under movie-images/<date_id>/ (or use --regenerate-video-segments) before re-running video.",
+  "fal_talking_head_model": "fal-ai/heygen/avatar4/image-to-video",
+  "fal_talking_head_fallback_model": "fal-ai/bytedance/omnihuman/v1.5",
+  "fal_sadtalker_still_mode": true,
+  "_comment_broll": "Hybrid: Kling i2v (portrait-backed anchors), Wan t2v (landscape B-roll). fal_broll_engine is legacy fallback when per-route keys omitted.",
+  "fal_broll_engine": "wan",
+  "fal_broll_i2v_engine": "kling-v3-standard",
+  "fal_broll_t2v_engine": "wan",
+  "fal_kling_broll_i2v_model": "fal-ai/kling-video/v3/standard/image-to-video",
+  "fal_kling_broll_t2v_model": "fal-ai/kling-video/v3/standard/text-to-video",
+  "fal_kling_talking_head_model": "fal-ai/kling-video/ai-avatar/v2/pro",
+  "fal_kling_broll_min_seconds": 3,
+  "fal_kling_broll_max_seconds": 15,
+  "fal_wan_broll_max_seconds": 10,
+  "visual_themes": [
+    {
+      "name": "Grounded Historical Realism",
+      "description": "Grounded documentary realism: naturalistic soft-daylight key, muted true earth tones, medium contrast, 35mm-equivalent moderate depth of field; believable physics in cloth, water, smoke, and human motion—nothing stylized or fantastical.",
+      "default": true
+    },
+    {
+      "name": "Observational Nature Study",
+      "description": "Natural-history look: cool daylight white balance, low-to-medium contrast, wide-to-normal lens with deep focus; lingering shots of terrain, rivers, plants, animals, and weather, as if quietly recorded in the field."
+    },
+    {
+      "name": "Slow Cinema Minimalism",
+      "description": "Slow cinema minimalism: low-contrast desaturated grade, soft overcast or twilight key, long quiet shadows, shallow depth of field on a longer lens; very little motion, long-held shots, tiny shifts in light or water carrying the moment."
+    }
+  ],
+  "video_prompt_replacements": [
+    {
+      "find": "the dog",
+      "replace": "the Newfoundland dog"
+    },
+    {
+      "find": "my dog",
+      "replace": "my Newfoundland dog"
+    },
+    {
+      "find": "The dog",
+      "replace": "The Newfoundland dog"
+    },
+    {
+      "find": "My dog",
+      "replace": "My Newfoundland dog"
+    },
+    {
+      "find": "the Newfoundland dog, the Newfoundland dog",
+      "replace": "the Newfoundland dog"
+    },
+    {
+      "find": "Seaman's ",
+      "replace": "Seaman, the Newfoundland dog's "
+    },
+    {
+      "find": "seaman's ",
+      "replace": "Seaman, the Newfoundland dog's "
+    },
+    {
+      "find": "Seaman ",
+      "replace": "Seaman, the Newfoundland dog "
+    },
+    {
+      "find": "seaman ",
+      "replace": "Seaman, the Newfoundland dog "
+    }
+  ],
+  "prompt_replacements": [
+    {
+      "find": "indians",
+      "replace": "Native Americans"
+    },
+    {
+      "find": "Indians",
+      "replace": "Native Americans"
+    },
+    {
+      "find": "indian",
+      "replace": "Native American"
+    },
+    {
+      "find": "Indian",
+      "replace": "Native American"
+    }
+  ],
+  "archived_visual_themes": [
+    {
+      "name": "Material Culture Focus on human artifacts",
+      "description": "Material-culture close study: warm firelight/window key, rich contrast holding texture in leather, wood grain, and metal, shallow depth of field on a longer lens; everyday tools, packs, weapons, cookware, and camp goods in extreme texture detail."
+    },
+    {
+      "name": "Exploratory futuristic science adventure",
+      "description": "Exploratory pacing and sense of journey; clean compositions and deliberate camera motion; crisp, almost documentary-futurist clarity applied to historical subjects."
+    },
+    {
+      "name": "Hand-drawn historical illustration",
+      "description": "Live-action expedition footage with an ink-and-wash mood—muted sepia, soft washes, delicate light—no drawn lines, paper edges, engraving texture, or anything that reads as text or a document; stay photoreal, not a picture of a page."
+    },
+    {
+      "name": "Educational schematic visualization",
+      "description": "Minimalist diagram-like framing and cutaway-style views that emphasize structure and function; suggest diagrams through composition and simplified forms, not legible labels or typography."
+    },
+    {
+      "name": "Period Engraving / Etching",
+      "description": "High-contrast engraved look inspired by early 19th-century prints."
+    },
+    {
+      "name": "Painterly Landscape Study",
+      "description": "Outdoor landforms, riverscapes, and sky; soft brushstroke-like treatment, atmospheric perspective, emphasis on light, distance, and scale."
+    },
+    {
+      "name": "Minimalist Schematic Visualization",
+      "description": "Clean shapes, restrained color, simplified forms that read almost schematic; imply structure through layout and negative space, not charts or readable text."
+    },
+    {
+      "name": "Measured World",
+      "description": "Surveying and geometry suggested through composition, sightlines, and spatial rhythm; imply distance, angle, bearing, and elevation without legible numbers, scales, or labels."
+    },
+    {
+      "name": "Monochrome Field Notes",
+      "description": "Limited, near-monochrome palette; tight, notebook-like framing; the feel of quick field observation without legible handwriting or labels."
+    },
+    {
+      "name": "Silhouette and Shadow",
+      "description": "Strong light–dark contrast; backlit silhouettes and deep shadow; human forms and gear suggested by outline rather than fine facial or fabric detail."
+    },
+    {
+      "name": "Abstract atmospheric impression",
+      "description": "Emphasize wind, water, light, and mood over literal detail; stay photoreal, not illustrated. No legible text, captions, or diagram overlays in the scene."
+    },
+    {
+      "name": "Charcoal Field Sketches",
+      "description": "Soft charcoal and graphite linework with subtle paper texture; loose shading and smudges that feel like field sketches made on the spot."
+    },
+    {
+      "name": "Woodcut Chronicle",
+      "description": "Bold, blocky shapes and heavy black contours like hand-carved woodcut prints; simplified forms with strong light and dark contrast."
+    },
+    {
+      "name": "River Mirror Reflections",
+      "description": "Compositions built around reflections in water—boats, trees, and sky—using calm surfaces and soft ripples to double the scene and emphasize symmetry."
+    },
+    {
+      "name": "Campfire Recollection",
+      "description": "Memory of firelight: soft vignette, warm cast, gentle blur—one continuous shot or at most two figures; no split screen or panels."
+    },
+    {
+      "name": "Sky-Dominant Horizons",
+      "description": "Low camera and wide framing that give most of the frame to the sky; cloud formations, light gradients, and changing weather dominate over land and river detail."
+    }
+  ],
+  "tts_stage_direction_pause_seconds": 0.75,
+  "narration_dialogue_gap_seconds": 0.25,
+  "talking_head_tail_silence_seconds": 0.5,
+  "dialogue_conversation_mode": {
+    "enabled": true,
+    "min_segments": 4,
+    "min_lines_per_segment": 1,
+    "min_lines_per_talking_head_segment": 1,
+    "max_lines_per_talking_head_segment": 1,
+    "min_lines_per_b_roll_segment": 4
+  }
+}

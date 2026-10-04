@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "title": "Lewis & Clark — run-daily",
+  "description": "Pick options below, then Run or Dry-run. This page loads options from pipeline_ui/options.json (refresh to pick up edits).",
+  "backend": {
+    "script": "run-daily.py",
+    "python_candidates": [
+      ".venv/Scripts/python.exe",
+      ".venv/bin/python"
+    ]
+  },
+  "fields": [
+    {
+      "id": "date",
+      "label": "Journal date",
+      "type": "text",
+      "placeholder": "YYYY-MM-DD, next, or leave blank for today",
+      "help": "Blank = today's month/day (expedition year resolved by run-daily). Use next for the next journal after last successful run.",
+      "arg": "--date",
+      "omit_if_empty": true
+    },
+    {
+      "id": "vendor",
+      "label": "Video vendor",
+      "type": "select",
+      "default": "fal",
+      "choices": [
+        {
+          "value": "fal",
+          "label": "fal (Wan, default)"
+        },
+        {
+          "value": "google",
+          "label": "google (Veo)"
+        },
+        {
+          "value": "sora",
+          "label": "sora (browser UI)"
+        }
+      ],
+      "arg": "--vendor"
+    },
+    {
+      "id": "regenerate_video_segments",
+      "label": "Regenerate video segments (optional)",
+      "type": "text",
+      "placeholder": "e.g. 3 or 2,5,7 — leave blank for normal run",
+      "help": "google/fal only: 1-based segment numbers, comma-separated. Moves those clips and copies the final output into a timestamped regen_backup_* folder under movie-images for this date, re-runs only those clips, then reassembles. Continues to assembly and YouTube upload if enabled. Does not update last-run date in state.",
+      "arg": "--regenerate-video-segments",
+      "omit_if_empty": true
+    },
+    {
+      "id": "tts",
+      "label": "TTS",
+      "type": "select",
+      "default": "openai",
+      "choices": [
+        {
+          "value": "openai",
+          "label": "openai (default)"
+        },
+        {
+          "value": "pyttsx3",
+          "label": "pyttsx3 (local)"
+        }
+      ],
+      "arg": "--tts"
+    },
+    {
+      "id": "model",
+      "label": "OpenAI model (narration)",
+      "type": "text",
+      "placeholder": "e.g. gpt-4o (optional)",
+      "help": "Leave blank for script default.",
+      "arg": "--model",
+      "omit_if_empty": true
+    },
+    {
+      "id": "narration_only",
+      "label": "Narration only (stop after narration JSON)",
+      "type": "checkbox",
+      "default": false,
+      "help": "Runs scrape if needed + two-phase narration only. No TTS, video, assembly, or upload. Does not update last successful pipeline date.",
+      "true_only_arg": "--narration-only"
+    },
+    {
+      "id": "skip_existing",
+      "label": "Skip steps when outputs already exist",
+      "type": "checkbox",
+      "default": true,
+      "help": "When unchecked, forces re-run of steps (--no-skip-existing).",
+      "false_only_arg": "--no-skip-existing"
+    },
+    {
+      "id": "no_focus_topic",
+      "label": "No automatic focus topic",
+      "type": "checkbox",
+      "workflows": [
+        "full"
+      ],
+      "default": false,
+      "help": "Disables theme_engine for narration: no similarity-based focus topic; no recommend/record. Passed as --no-focus-topic. After regenerate, use narrations/narration<DATE>.json — not the timestamped backup file, which is the previous version.",
+      "true_only_arg": "--no-focus-topic"
+    },
+    {
+      "id": "dialogue_mode",
+      "label": "Dialogue mode (character voices)",
+      "type": "checkbox",
+      "workflows": [
+        "narration",
+        "video",
+        "full"
+      ],
+      "default": false,
+      "help": "Phase 1 uses lewis_clark_dialogue: narrator-led structure with character dialogue in at most 3 segments. Multi-voice dialogue[] + talking_head rules. For denser cast dialogue use Long conversation episode. Checked: --dialogue. Unchecked: --no-dialogue unless Use week arc is on (then omit flags so week arc / existing narration JSON decide). If neither flag is passed, run-daily infers dialogue from the narration file.",
+      "true_only_arg": "--dialogue",
+      "false_only_arg": "--no-dialogue"
+    },
+    {
+      "id": "long_conversation_mode",
+      "label": "Long conversation episode (extended pack)",
+      "type": "checkbox",
+      "workflows": [
+        "narration",
+        "video",
+        "full"
+      ],
+      "default": false,
+      "help": "Phase 1/2 use lewis_clark_long_conversation (implies dialogue: more segments + optional conversation_tracking). Checked: --long-conversation. Unchecked: omit long-conversation flags so run-daily / week arc can infer from narrations/narration<DATE>.json when that file has long_conversation_mode true.",
+      "true_only_arg": "--long-conversation"
+    },
+    {
+      "id": "ambient",
+      "label": "Mix ambient bed (assembly)",
+      "type": "checkbox",
+      "default": false,
+      "help": "Adds --ambient to run-daily: during assembly, mix loops from ambient_library/ when narration audio_design uses light or moderate ambience (none = no bed).",
+      "true_only_arg": "--ambient"
+    },
+    {
+      "id": "force_assembly",
+      "label": "Force final assembly",
+      "type": "checkbox",
+      "workflows": [
+        "narration",
+        "video",
+        "full"
+      ],
+      "default": false,
+      "help": "Runs videos-mp3-to-movie even when skip-existing would skip assembly. When Run performs B-roll materialize, this is turned on automatically for that run.",
+      "true_only_arg": "--force-assembly"
+    },
+    {
+      "id": "dry_run",
+      "label": "Dry run (show plan only, no API calls)",
+      "type": "checkbox",
+      "workflows": [
+        "narration",
+        "video",
+        "full"
+      ],
+      "default": false,
+      "help": "Adds --dry-run. You can also use Set dry-run & run (checks this box and starts).",
+      "true_only_arg": "--dry-run"
+    },
+    {
+      "id": "upload",
+      "label": "Upload to YouTube when done",
+      "type": "checkbox",
+      "default": false,
+      "true_only_arg": "--upload"
+    },
+    {
+      "id": "privacy",
+      "label": "YouTube privacy (if uploading)",
+      "type": "select",
+      "default": "public",
+      "choices": [
+        {
+          "value": "public",
+          "label": "public"
+        },
+        {
+          "value": "unlisted",
+          "label": "unlisted"
+        },
+        {
+          "value": "private",
+          "label": "private"
+        }
+      ],
+      "arg": "--privacy",
+      "only_if": {
+        "field": "upload",
+        "equals": true
+      }
+    }
+  ]
+}

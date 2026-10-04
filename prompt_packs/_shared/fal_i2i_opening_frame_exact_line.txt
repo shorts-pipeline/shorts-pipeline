@@ -1,0 +1,2 @@
+Opening frame only (t=0, before any motion in the clip)—the still must match this moment exactly:
+

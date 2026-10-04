@@ -1,0 +1,33 @@
+{
+  "$schema": "https://example.com/lewis-clark-narration-characters.schema.json",
+  "version": "1.0",
+  "pair_portraits": [],
+  "people": [
+    {
+      "id": "guide",
+      "name": "Example Guide",
+      "roles": ["guide", "navigator"],
+      "physical_description": "A weathered middle-aged traveler in a long wool coat and wide-brimmed hat, carrying a leather satchel and a brass compass",
+      "key_skills": ["navigation", "route finding"],
+      "skill_keywords": ["route", "trail", "navigate", "compass"],
+      "dialogue_profile": {
+        "habitual_words": ["ahead", "bearing"],
+        "speech_rhythm": "Calm and practical; short sentences about distance, terrain and weather.",
+        "cues": ["Plain, matter-of-fact tone; avoids exaggeration."]
+      }
+    },
+    {
+      "id": "scout",
+      "name": "Example Scout",
+      "roles": ["scout", "hunter"],
+      "physical_description": "A lean young traveler in a buckskin shirt and sturdy boots, with a canvas pack and a coil of rope",
+      "key_skills": ["tracking", "hunting"],
+      "skill_keywords": ["track", "hunt", "scout", "game"],
+      "dialogue_profile": {
+        "habitual_words": ["fresh", "tracks"],
+        "speech_rhythm": "Quick and observant; reports what was seen and where.",
+        "cues": ["Curious and energetic; asks questions."]
+      }
+    }
+  ]
+}

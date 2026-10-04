@@ -1,0 +1,86 @@
+# Environment and secrets
+.env
+client_secrets.json
+client_secret_lewis_clark_upload.json
+token.json
+instagram_token.json
+
+# Python
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Machine-local (copy from *.example after clone — see AGENTS.md)
+latest_narration.url
+latest_video.url
+state/run_daily_state.json
+state/episode_diversity_*.json
+!state/episode_diversity_*.json.example
+state/fal_usage_state.json
+!state/fal_usage_state.json.example
+state/week_arcs/week_*.json
+!state/week_arcs/week_arc.example.json
+pipeline_ui/options.json
+# Run-mutated state (dirtied on every pipeline run — see AGENTS.md)
+theme_engine/state.json
+pipeline/character_usage.json
+state/pipeline_ui_run.lock
+
+# Pipeline UI (ffmpeg frame cache for B-roll thumbnails)
+pipeline_ui/.thumb_cache/
+pipeline_ui/.restart_request
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# B-roll theme reports (regenerate: python scripts/b_roll_mine_prompt_themes.py)
+b_roll_library/prompt_theme_report.csv
+b_roll_library/prompt_mine_report.json
+
+# Project artifacts
+sora-profile/
+temp/
+output/
+
+# Ambient loops and local library content (manifest + audio live here; not in repo)
+ambient_library/*
+!ambient_library/manifest.json.example
+!ambient_library/README.md
+!ambient_library/CREDITS-ambient.md
+!ambient_library/spring_ambient_guidance.md
+
+# Local archived quarters (large MP4/audio/movie-images trees); policy in README only
+archive/*
+!archive/README.md
+
+# Dialogue profile mining reports (regenerate: scripts/mine_journal_dialogue_profiles.py)
+config/dialogue_profile_mining/*
+!config/dialogue_profile_mining/README.md
+!config/dialogue_profile_mining/*.example
+
+# Generated / scraped data (reproducible by pipeline)
+audio/
+journal-entries/
+location_data/cache/
+movie-images/
+narrations/
+old/
+theme_engine/embeddings.json
+
+# Logs (grow over time)
+logs/
+
+# Ad hoc scratch / debug files at repo root (e.g. _import_check.py, _debug_*.png, _pytest_out.txt)
+/_*
+!/_*.md

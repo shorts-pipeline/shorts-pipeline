@@ -1,0 +1,30 @@
+{
+  "prompt_pack": "lewis_clark",
+  "through_date_id": "18040531",
+  "episode_count": 15,
+  "generated_at": "2026-05-18T12:00:00Z",
+  "model": "gpt-4o-mini",
+  "fingerprint": "example_sha256_replace_after_refresh",
+  "patterns": [
+    {
+      "id": "morning_departure_opener",
+      "category": "open_bookend",
+      "prevalence": "4/5",
+      "evidence": ["18040528: dawn broke…", "18040530: embarked at dawn…"],
+      "suggested_hint": "Recent segment-1 hooks skew dawn/morning departure—when the journal allows, open on the day's stakes or main event instead of another wake-and-set-out beat."
+    }
+  ],
+  "recommended_checkers": [
+    {
+      "id": "morning_departure_opener",
+      "check_type": "first_segment_regex",
+      "patterns": ["\\bat dawn\\b", "\\bsets out early\\b", "\\bmorning broke\\b"],
+      "skew_threshold": 0.5,
+      "status": "proposed"
+    }
+  ],
+  "notes": "Example cache — run scripts/refresh_episode_diversity_audit.py to regenerate.",
+  "hints": [
+    "Recent segment-1 hooks skew dawn/morning departure—when the journal allows, open on the day's stakes or main event instead of another wake-and-set-out beat."
+  ]
+}

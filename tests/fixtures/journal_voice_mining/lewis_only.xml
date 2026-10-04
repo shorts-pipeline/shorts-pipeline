@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>Test</title></titleStmt>
+      <sourceDesc>
+        <bibl>
+          <author xml:id="ml">Meriwether Lewis</author>
+        </bibl>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="entry">
+        <sp who="#ml">
+          <speaker>Lewis</speaker>
+          <p>I observed several species of plants along the bank. The specimens appeared to be considerable.</p>
+          <p>Took equal altitudes and recorded latitude with the octant before the party stirred.</p>
+        </sp>
+      </div>
+    </body>
+  </text>
+</TEI>

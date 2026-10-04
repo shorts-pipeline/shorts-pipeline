@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "description": "Optional keyword buckets for scripts/b_roll_mine_prompt_themes.py. A segment matches a bucket if the normalized video_prompt contains any listed substring (case-insensitive). First match wins; order buckets by priority if you care which label wins.",
+  "buckets": {
+    "river": ["river", "keelboat", "pirogue", "water surface", "bank"],
+    "camp": ["camp", "fire", "tent", "cook"],
+    "prairie": ["prairie", "grassland", "open plain"],
+    "mounds": ["mound", "earthwork"],
+    "ice": ["ice", "frozen", "winter"],
+    "horse": ["horse", "mounted"],
+    "forest": ["forest", "timber", "trees"],
+    "portrait_scene": ["close-up", "close up", "medium shot of"]
+  }
+}

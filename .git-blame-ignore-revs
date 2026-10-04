@@ -1,0 +1,6 @@
+# Commits to skip in `git blame` (whitespace/formatting only, no logic change).
+# Enable once per clone:  git config blame.ignoreRevsFile .git-blame-ignore-revs
+# (GitHub/most GUIs pick this file up automatically if present at the repo root.)
+
+# Apply ruff format (style only, no behavior change) -- one-time repo-wide pass
+ad8e5a071d2aa82d6e9922687c8d551475c3c995
